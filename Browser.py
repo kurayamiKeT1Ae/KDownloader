@@ -6,6 +6,7 @@ from colorama import Fore, Back, Style,init
 from pytube import Playlist
 from pytube import YouTube
 import pytube
+
 init()
 
 class Logs:
@@ -49,16 +50,13 @@ class Browser:
             try:
                 video.download(path)
                 _logs.addToLogs(f"DONE !")
-                file = video.title
-                file = file.replace(",", "").replace(".", "").replace("'", "")
-                FILE = f"{file}.mp4"
                 if MP3:
-                    _logs.addToLogs(f"CONVERTING {FILE} TO MP3...")
-                    if FILE in os.listdir():
-                        os.rename(f"{file}.mp4", f"{file}.mp3")
+                    _logs.addToLogs(f"CONVERTING {video.default_filename} TO MP3...")
+                    if video.default_filename in os.listdir(path):
+                        os.rename(f"{path}/{video.default_filename}", f"{path}/{video.default_filename[:-4]}.mp3")
                         _logs.addToLogs("DONE !")
                     else:
-                        _logs.addToLogs(f"Failed to convert {FILE} -> MP3")
+                        _logs.addToLogs(f"Failed to convert {video.default_filename} -> MP3")
             except:
                 _logs.addToLogs("FAILED !")
                 
@@ -87,17 +85,15 @@ class Browser:
         try:
             video.download(path)
             _logs.addToLogs(f"DONE !")
-            file = video.title
-            file = file.replace(",", "").replace(".", "").replace("'", "")
-            FILE = f"{file}.mp4"
             if MP3:
-                _logs.addToLogs(f"CONVERTING {FILE} TO MP3...")
-                if FILE in os.listdir():
-                    os.rename(f"{file}.mp4", f"{file}.mp3")
+                _logs.addToLogs(f"CONVERTING {video.default_filename} TO MP3...")
+                if video.default_filename in os.listdir(path):
+                    os.rename(f"{path}/{video.default_filename}", f"{path}/{video.default_filename[:-4]}.mp3")
                     _logs.addToLogs("DONE !")
                 else:
-                    _logs.addToLogs(f"Failed to convert {FILE} -> MP3")
-        except:
+                    _logs.addToLogs(f"Failed to convert {video.default_filename} -> MP3")
+        except Exception as e:
+            print(e)
             _logs.addToLogs("FAILED !")
 
         Browser.pringLOGS(path, str(_logs))

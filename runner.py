@@ -4,7 +4,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
 import PyQt5
 
-QMainWindow = PyQt5.QtWidgets.QMainWindow
+import os
+
+
 
 ## ==> MAIN WINDOW
 from main import Ui_MainWindow
@@ -12,9 +14,13 @@ from playlist_downloader import Playlist_Window
 from video_downloader import Video_Window
 from Browser import Browser
 
+from configuration import Config
+
 import time
 
 import threading
+
+QMainWindow = PyQt5.QtWidgets.QMainWindow
 
 currentWin = "MAIN"
 
@@ -63,12 +69,15 @@ class PlayListWindow(QMainWindow):
             DownloadThread = threading.Thread(target=Browser.downloadArray, args=(URL, _dir, False))
             DownloadThread.start()
 
+        self.ui.lineEdit.setText("")
+
     def mp3Downloader(self):
         _dir = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
         URL = self.ui.lineEdit.text()
         if not (_dir in ["", None, " "]):
             DownloadThread = threading.Thread(target=Browser.downloadArray, args=(URL, _dir, True))
             DownloadThread.start()
+        self.ui.lineEdit.setText("")
         
 
 class VideoWidnow(QMainWindow):
@@ -93,6 +102,7 @@ class VideoWidnow(QMainWindow):
         if not (_dir in ["", None, " "]):
             DownloadThread = threading.Thread(target=Browser.DownloadLink, args=(URL, _dir, False))
             DownloadThread.start()
+        self.ui.lineEdit.setText("")
 
     def mp3Downloader(self):
         _dir = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
@@ -100,6 +110,7 @@ class VideoWidnow(QMainWindow):
         if not (_dir in ["", None, " "]):
             DownloadThread = threading.Thread(target=Browser.DownloadLink, args=(URL, _dir, True))
             DownloadThread.start()
+        self.ui.lineEdit.setText("")
 
 
 
@@ -114,10 +125,39 @@ class MAIN(QMainWindow):
         self.main.show()
 
 
-    
-    
-
-if __name__ == "__main__":
+def RUN():
     app = QApplication(sys.argv)
     window = MAIN()
     sys.exit(app.exec_())
+
+
+
+if __name__ == "__main__":
+    RUN()
+    # isFile = os.path.exists
+    # dataFileName = "data.kdownloader"
+    # config = Config(path=dataFileName)
+    # if isFile(dataFileName):
+    #     if config.load()['installed_all']:
+    #         RUN()
+    #         print("run")
+    #     else:
+    #         print("exit 1")
+    #         sys.exit()
+    
+    # else:
+    #     config.build(data={
+    #         "installed_all": False
+    #     })
+    #     if config.load()['installed_all']:
+    #         RUN()
+    #         print("run 2")
+    #     else:
+    #         if config._config():
+    #             RUN()
+    #             print('run 2')
+    #         else:
+    #             print('exit 2')
+    #             sys.exit()
+
+        
