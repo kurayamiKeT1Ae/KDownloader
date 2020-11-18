@@ -1,0 +1,40 @@
+#centralwidget{
+    background-color: #2d3436;
+}
+
+#header{
+    color: #fd79a8;
+    font-size: 20px;
+}
+
+#header:hover{
+border: 1px solid #fd79a8;
+border-right: none;
+border-left: none;
+border-top: none;
+width: 50%;
+}
+
+QPushButton{
+
+
+    color: #fd79a8;
+    background-color: #2d3436;
+    border: none;
+    font-size: 20px;
+    
+
+
+}
+
+
+QPushButton:hover{
+    
+    color: white;
+    border: 1px solid #fd79a8;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    margin-top: 2px;
+
+}

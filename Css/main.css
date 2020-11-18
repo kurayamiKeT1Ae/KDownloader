@@ -1,0 +1,42 @@
+#centralwidget{
+background-color: #2d3436;
+}
+
+#title{
+color: #fd79a8;
+font-size: 20px;
+}
+
+#title:hover{
+border: 1px solid #fd79a8;
+border-right: none;
+border-left: none;
+border-top: none;
+width: 50%;
+}
+
+#copyrights{
+color:  #fd79a8;
+font-size: 12px;
+}
+
+#videoBtn,
+#playlistBtn{
+
+    color: #fd79a8;
+    background-color: #2d3436;
+    border: none;
+    font-size: 20px;
+
+}
+
+
+#videoBtn:hover,
+#playlistBtn:hover{
+
+    color: white;
+    border: 1px solid #fd79a8;
+    border-radius: 8px;
+    
+}
+
